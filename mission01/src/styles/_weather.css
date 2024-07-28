@@ -1,0 +1,70 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+html {
+  font-family: "Pretendard Variable";
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--forground);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-block-size: 100vh;
+}
+
+.WeatherData {
+  --padding: 30px;
+  --item-gap: 15px;
+  --list-size-w: 200px;
+  --contents-gap: 20px;
+  --img-size: 80px;
+
+  list-style-type: none;
+  margin-block: 0;
+  padding-inline-start: 0;
+
+  display: flex;
+  flex-flow: row;
+  gap: var(--item-gap);
+
+  li {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--contents-gap);
+    padding: var(--padding);
+    background: var(--gray-950);
+    inline-size: var(--list-size-w);
+    border-radius: 50px;
+
+    .Weather {
+      width: 80%;
+      height: 100%;
+      margin: 0;
+
+      img {
+        inline-size: var(--img-size);
+        ;
+        block-size: var(--img-size);
+        ;
+      }
+
+      p {
+        margin: 5px 0;
+        color: #bdbdbd;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      span {
+        font-size: 1.3rem;
+        font-weight: 500;
+      }
+    }
+  }
+}
