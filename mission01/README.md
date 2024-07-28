@@ -13,9 +13,15 @@
 - figma에서 선정한 기능을 컴포넌트로 구현
 - figma 시안 작성에 꽤 많은 시간을 투자하게 되어 개발에 시간이 부족하다고 판단
 - 컴포넌트 안에 컴포넌트가 있었기 때문에 많은 것을 구현하려한 시도가 아토믹 디자인에선 옳지 않았다고 생각함
+- TIVING 컴포넌트 figma 시안 [LINK](https://www.figma.com/design/QNRcSZGoHZn2BFk3YPUbm8/mission01_tving?node-id=5001-101&t=LTtD5BSPASmYXmfp-1)
 
 ##### 3. 날씨 아이콘 컴포넌트
 
 - 컴포넌트를 직접 구현해보고 사용해보는 것이 목적이라 생각해 수업시간에 나온 날씨 아이콘을 구현하기로 변경
 - status를 통해 날씨에 관련된 상태를 입력받음
 - 해당 정보를 사용자가 인식할 수 있도록 p태그와 span태그를 통해 전달(label요소도 삽입했으나 옳게 작동하는지 판단을 하지 못함)
+- 날씨 컴포넌트 figma 시안 [LINK](https://www.figma.com/design/r7DlfOn0FBOA0VjtyJaTMl/mission01_Weather?node-id=5001-45&t=fQk4iAx3KOFtkarG-1)
+
+##### 4. 구현 결과
+
+![결과 이미지](./src/assets/result.png)
