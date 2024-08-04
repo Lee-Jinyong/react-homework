@@ -11,7 +11,7 @@ export default function AutoLoginButton({ isActive }: Props): JSX.Element {
   }
 
   return (
-    <div className="autoLoginWrapper" onClick={handleClickWrapper}>
+    <div className="autoLoginWrapper" onClick={handleClickWrapper} role="button">
       <span>자동로그인</span>
       {isActive?
         <img className="checkButton" src="/CheckActive.svg" alt="활성화"/>:
