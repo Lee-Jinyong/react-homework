@@ -1,14 +1,15 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "@/App.jsx";
-import "@/index.css";
+import AutoLoginButton from "@/components/AutoLoginButton.tsx";
+import { isActive } from "./data/AutoLoginButton.ts";
+import "@/style/main.css";
 
 const container = document.getElementById("react-app");
 
 if (container) {
-  createRoot(container).render(
+  createRoot(container as HTMLElement).render(
     <StrictMode>
-      <App />
+      <AutoLoginButton isActive={isActive} />
     </StrictMode>
   );
 } else {
