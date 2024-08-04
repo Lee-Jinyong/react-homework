@@ -17,3 +17,11 @@
 ##### 리액트를 활용해 컴포넌트 생성하기
 
 [mission01](mission01/ "mission01") (updated 2024.07.28)
+
+&nbsp;
+
+### mission02
+
+##### 리액트 컴포넌트 속성 검사
+
+[mission02](mission02/ "mission02") (updated 2024.08.04)
