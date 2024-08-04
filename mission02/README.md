@@ -1,42 +1,28 @@
-# Vite + React 템플릿
+## 리액트를 활용한 컴포넌트 구현 과제
 
-Vite 커스텀 템플릿을 사용해 React 프로젝트 스캐폴딩 할 수 있습니다.
+#
 
----
+### 과제 해결 순서
 
-## 스캐폴딩 명령
+##### 1. 프로젝트 컴포넌트 선정
 
-[degit](https://github.com/Rich-Harris/degit?tab=readme-ov-file#readme) 명령을 사용해 프로젝트를 스캐폴딩합니다.
+- 지난번 과제 수행 시 날씨 아이콘 컴포넌트를 작성했기에 TVING 컴포넌트를 재선정
+- TypeScript를 통해 속성 검사를 하기로 결정했기 때문에 간단한 컴포넌트인 자동로그인 버튼으로 컴포넌트 구현 결정
 
-```sh
-degit Lee-Jinyong/vite-react <프로젝트_이름>
-```
+##### 2. figma 디자인 생성
 
-&nbsp;
+- figma에서 자동로그인 버튼 컴포넌트 생성
+- Active와 Deactive 상태로 나누어 컴포넌트 구현
+- 자동로그인 컴포넌트 figma 시안 [LINK](https://www.figma.com/design/s5Oaky8F4Im19A7m0ZCWxI/mission02?node-id=1-74&t=DZyeWb41AkdyLo78-1)
 
-## 폴더 구조
-![폴더 구조](https://github.com/user-attachments/assets/d625d34a-dec4-4ee3-a58d-a18b78751d89)
+##### 3. 환경 구성
 
-- public : 정적 자산 폴더
-- src : 소스 파일 폴더
-  - assets : 동적 자산 폴더
-  - components : 컴포넌트 폴더
-  - pages : 페이지 폴더
-- index.html : 메인 HTML 파일
+- 지난 번 과제 수행 시 만들어둔 vite + react 스캐폴딩을 이용해서 프로젝트 구성
+- TypeScript 설치
+- jsx확장자 대신 tsx 확장자 사용
 
-&nbsp;
+##### 4. 어려웠던 점
 
-## 설치된 패키지
-
-- Vite
-- React
-- types/react
-- types/react-dom
-- types/node
-- vitejs/plugin-react
-- ESLint
-- eslint-plugin-react-hooks
-- eslint-plugin-react-refresh
-
-스캐폴딩 후 `pnpm i` 명령어를 실행하여 패키지를 설치할 것
-(해당 커스텀 템플릿은 pnpm을 사용)
+- 직접 작동할 수 있는 버튼을 만들고 싶었으나, 전달된 속성(prop)을 변환해서 리렌더링 하는 방법에 어려움을 겪었음
+- 그래서 수업에서 했듯이, 데이터 파일을 만들어두고 수동으로 수정하는 방식을 사용해 컴포넌트를 작동할 수 있음
+- `<div>` 태그가 button 역할을 가지게 하고 싶어서 jsx 코드에 role 속성을 부여했는데, 올바른 사용인지 모르겠음
