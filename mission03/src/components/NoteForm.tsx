@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useId, useState } from 'react';
-import { getUserList } from '../api/getUser';
+import { getUser, getUserList } from '../api/getUser';
 import { NoteType } from '../types/note';
-import { convertHTMLToText } from '@/utils/convertTextToHTMLString';
+import { convertHTMLToText, convertTextToHTMLString } from '@/utils/convertTextToHTMLString';
 import './NoteForm.css';
 
 const userList = getUserList();
@@ -9,21 +9,24 @@ const userList = getUserList();
 interface NoteForm {
   mode?: 'create' | 'edit',
   note?: NoteType,
+  newNoteId: number,
+  onCreate?: (newNoteItem: NoteType) => void,
+  onBackToList?: () => void
 };
 
-function NoteForm({ mode = 'create', note }: NoteForm) : JSX.Element {
+function NoteForm({ mode = 'create', note, newNoteId, onCreate, onBackToList }: NoteForm) : JSX.Element {
   const titleId = useId();
   const contentId = useId();
   const userId = useId();
 
-  // 상태 선언
+  // [상태 선언]
   const [formData, setFormData] = useState({
     title: '',
     content: '',
     userId: 0,
   })
 
-  // 상태 업데이트
+  // [상태 업데이트]
 
   const handleUpdateFormData = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -37,6 +40,36 @@ function NoteForm({ mode = 'create', note }: NoteForm) : JSX.Element {
   // 노트 생성
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+
+    const { title, content, userId } = formData;
+
+    if (title.trim().length === 0) {
+      alert('제목을 적어주세요.')
+      return;
+    }
+    else if (content.trim().length === 0) {
+      alert('내용을 적어주세요.')
+      return;
+    } else if (userId === 0) {
+      alert('작성자를 선택하세요.')
+      return;
+    }
+
+    const newUserId = Number(userId);
+
+    const newNoteItem = {
+      id: newNoteId,
+      title: title.trim(),
+      content: convertTextToHTMLString(content),
+      userId: newUserId,
+      expand: {
+        user: getUser(newUserId),
+      }
+    }
+
+    onCreate?.(newNoteItem as NoteType);
+
+    onBackToList?.();
   };
 
   // 노트 초기화
@@ -49,13 +82,9 @@ function NoteForm({ mode = 'create', note }: NoteForm) : JSX.Element {
     console.log('delete');
   };
 
-  // 파생 상태
+  // [파생 상태]
   const isCreateMode = mode.includes('create');
   const submitButtonLabel = isCreateMode ? '추가' : '수정';
-
-  if (note) {
-    note.content;
-  }
 
   return (
     <form className="NoteForm" onSubmit={handleSubmit} onReset={handleReset}>
