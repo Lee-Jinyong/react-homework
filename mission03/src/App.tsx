@@ -6,15 +6,26 @@ import NoteDetailPage from './pages/NoteDetailPage';
 import NoteEditPage from './pages/NoteEditPage';
 
 function NoteApp() {
-  const [routeInfo] = useState({
+  // 상태 선언
+  const [routeInfo, setRouteInfo] = useState({
     route: ROUTES.list,
     noteId: null,
   });
 
+  // 상태 업데이트
+
+  // 루트 상태 변경 함수
+  const handleChangeRoute = (nextRoute: string) => {
+    setRouteInfo({
+      ...routeInfo,
+      route: nextRoute
+    })
+  }
+
   switch (routeInfo.route) {
     default:
     case ROUTES.list:
-      return <NoteListPage />;
+      return <NoteListPage onChangeRoute={handleChangeRoute} />;
     case ROUTES.create:
       return <NoteCreatePage />;
     case ROUTES.detail:
