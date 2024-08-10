@@ -1,16 +1,16 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "@/App.tsx";
-import "@/index.css";
+import '@/styles/main.css';
+import NoteApp from '@/App';
 
-const container = document.getElementById("react-app");
+const container = document.getElementById('react-app');
 
 if (container) {
   createRoot(container).render(
     <StrictMode>
-      <App />
+      <NoteApp />
     </StrictMode>
-  );
+  )
 } else {
-  console.warn('문서에 "#react-app" 요소가 존재하지 않습니다.');
+  console.warn('문서에 "#react-app" 요소가 존재하지 않습니다.')
 }

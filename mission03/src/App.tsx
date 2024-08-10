@@ -1,35 +1,27 @@
-import { useState } from "react";
-import reactLogo from "@/assets/react.svg";
-import viteLogo from "/vite.svg";
-import "@/App.css";
+import { useState } from 'react';
+import { ROUTES } from './constants/routes';
+import NoteListPage from './pages/NoteListPage';
+import NoteCreatePage from './pages/NoteCreatePage';
+import NoteDetailPage from './pages/NoteDetailPage';
+import NoteEditPage from './pages/NoteEditPage';
 
-function App() {
-  const [count, setCount] = useState(0);
+function NoteApp() {
+  const [routeInfo] = useState({
+    route: ROUTES.list,
+    noteId: null,
+  });
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  );
+  switch (routeInfo.route) {
+    default:
+    case ROUTES.list:
+      return <NoteListPage />;
+    case ROUTES.create:
+      return <NoteCreatePage />;
+    case ROUTES.detail:
+      return <NoteDetailPage noteId={routeInfo.noteId} />;
+    case ROUTES.edit:
+      return <NoteEditPage noteId={routeInfo.noteId} />;
+  }
 }
 
-export default App;
+export default NoteApp;
