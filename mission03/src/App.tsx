@@ -24,7 +24,7 @@ function NoteApp() {
   // [상태 업데이트]
 
   // 루트 상태 변경 함수
-  const handleChangeRoute = (nextRoute: string, pickNoteId?: number) => {
+  const handleChangeRoute = (nextRoute: string, pickNoteId?: number = 0) => {
     setRouteInfo({
       ...routeInfo,
       route: nextRoute,
@@ -55,7 +55,7 @@ function NoteApp() {
     case ROUTES.create:
       return <NoteCreatePage newNoteId={newNoteId} onCreate={handleCreateNote} onChangeRoute={handleChangeRoute} />;
     case ROUTES.detail:
-      return <NoteDetailPage noteId={routeInfo.noteId} />;
+      return <NoteDetailPage noteId={routeInfo.noteId} onChangeRoute={handleChangeRoute} />;
     case ROUTES.edit:
       return <NoteEditPage noteId={routeInfo.noteId} />;
   }
