@@ -7,7 +7,7 @@ import { NoteType } from '@/types/note';
 interface NoteCreatePage {
   newNoteId: number,
   onCreate : (newNoteItem: NoteType) => void,
-  onChangeRoute : (nextRoute: string) => void
+  onChangeRoute : (nextRoute: string, pickNoteId?: number) => void
 }
 
 function NoteCreatePage({ newNoteId, onCreate, onChangeRoute }: NoteCreatePage): JSX.Element {

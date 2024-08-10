@@ -6,19 +6,19 @@ import { NoteListType } from '@/types/note';
 
 interface NoteListPage {
   list : NoteListType,
-  onChangeRoute : (nextRoute: string) => void
+  onChangeRoute : (nextRoute: string, pickNoteId?: number) => void,
 }
 
 function NoteListPage({ list, onChangeRoute }: NoteListPage) : JSX.Element {
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault;
+    e.preventDefault();
     onChangeRoute?.(ROUTES.create);
   }
 
   return (
     <div className="NoteListPage">
-      <NoteList list={list} />
+      <NoteList list={list} onChangeRoute={onChangeRoute} />
       <a className="createNoteLink" href="#create-note" onClick={handleClick}>
         노트 작성
       </a>

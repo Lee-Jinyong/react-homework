@@ -7,9 +7,14 @@ import NoteEditPage from './pages/NoteEditPage';
 import { getNoteList } from './api/getNote';
 import { NoteListType, NoteType } from './types/note';
 
+interface routeType {
+  route: string,
+  noteId: number | null
+}
+
 function NoteApp() {
   // [상태 선언]
-  const [routeInfo, setRouteInfo] = useState({
+  const [routeInfo, setRouteInfo] = useState<routeType>({
     route: ROUTES.list,
     noteId: null,
   });
@@ -19,10 +24,11 @@ function NoteApp() {
   // [상태 업데이트]
 
   // 루트 상태 변경 함수
-  const handleChangeRoute = (nextRoute: string) => {
+  const handleChangeRoute = (nextRoute: string, pickNoteId?: number) => {
     setRouteInfo({
       ...routeInfo,
-      route: nextRoute
+      route: nextRoute,
+      noteId: pickNoteId ? pickNoteId : routeInfo.noteId,
     })
   }
 
