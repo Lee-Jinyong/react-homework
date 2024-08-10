@@ -1,3 +1,4 @@
+import { ROUTES } from '@/constants/routes';
 import { getNoteItem } from '../api/getNote';
 import BackLink from '../components/BackLink';
 import NoteForm from '../components/NoteForm';
@@ -6,14 +7,17 @@ import './NoteEditPage.css';
 
 interface NoteEditPage {
   noteId: number,
+  onChangeRoute?: (nextRoute: string, pickNoteId?: number) => void,
 };
 
-function NoteEditPage({ noteId }: NoteEditPage) : JSX.Element {
+function NoteEditPage({ noteId, onChangeRoute }: NoteEditPage) : JSX.Element {
   const note = getNoteItem(noteId);
+
+  const handleBackToList = () => onChangeRoute?.(ROUTES.list);
 
   return (
     <div className="NoteEditPage">
-      <BackLink />
+      <BackLink onClick={handleBackToList} />
       {!note && <PrintError>`{noteId}` 노트가 존재하지 않습니다.</PrintError>}
       {note && (
         <>
