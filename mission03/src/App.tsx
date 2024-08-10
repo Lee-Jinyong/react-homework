@@ -48,6 +48,11 @@ function NoteApp() {
   };
 
   // 노트 삭제
+  const handleDeleteNote = (willDeleteNoteId: number) => {
+    const nextList = list.filter(item => item.id !== willDeleteNoteId);
+
+    setList(nextList);
+  }
 
   // [파생 상태]
   const newNoteId:number = list.length + 1;
@@ -62,7 +67,7 @@ function NoteApp() {
     case ROUTES.detail:
       return <NoteDetailPage noteId={routeInfo.noteId} onChangeRoute={handleChangeRoute} />;
     case ROUTES.edit:
-      return <NoteEditPage noteId={routeInfo.noteId} onEdit={handleEditNote} onChangeRoute={handleChangeRoute} />;
+      return <NoteEditPage noteId={routeInfo.noteId} onEdit={handleEditNote} onDelete={handleDeleteNote} onChangeRoute={handleChangeRoute} />;
   }
 }
 

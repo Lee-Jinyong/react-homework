@@ -12,10 +12,11 @@ interface NoteForm {
   newNoteId?: number,
   onCreate?: (newNoteItem: NoteType) => void,
   onEdit?: (willEditNote: NoteType) => void,
+  onDelete? : (willDeleteNoteId: number) => void,
   onBackToList?: () => void
 };
 
-function NoteForm({ mode = 'create', note, newNoteId, onCreate, onEdit, onBackToList }: NoteForm) : JSX.Element {
+function NoteForm({ mode = 'create', note, newNoteId, onCreate, onEdit, onDelete, onBackToList }: NoteForm) : JSX.Element {
   const titleId = useId();
   const contentId = useId();
   const userId = useId();
@@ -109,7 +110,11 @@ function NoteForm({ mode = 'create', note, newNoteId, onCreate, onEdit, onBackTo
 
   // 노트 삭제
   const handleDelete = () => {
-    console.log('delete');
+    if(note) {
+      onDelete?.(note.id as number)
+    }
+
+    onBackToList?.();
   };
 
   // [파생 상태]

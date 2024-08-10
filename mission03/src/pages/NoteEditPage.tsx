@@ -9,10 +9,11 @@ import { NoteType } from '@/types/note';
 interface NoteEditPage {
   noteId: number,
   onEdit?: (willEditNote: NoteType) => void, 
+  onDelete? : (willDeleteNoteId: number) => void,
   onChangeRoute?: (nextRoute: string, pickNoteId?: number) => void,
 };
 
-function NoteEditPage({ noteId, onEdit, onChangeRoute }: NoteEditPage) : JSX.Element {
+function NoteEditPage({ noteId, onEdit, onDelete, onChangeRoute }: NoteEditPage) : JSX.Element {
   const note = getNoteItem(noteId);
 
   const handleBackToList = () => onChangeRoute?.(ROUTES.list);
@@ -24,7 +25,7 @@ function NoteEditPage({ noteId, onEdit, onChangeRoute }: NoteEditPage) : JSX.Ele
       {note && (
         <>
           <h2>노트 편집</h2>
-          <NoteForm mode="edit" note={note} onEdit={onEdit} onBackToList={handleBackToList} />
+          <NoteForm mode="edit" note={note} onEdit={onEdit} onDelete={onDelete} onBackToList={handleBackToList} />
         </>
       )}
     </div>
