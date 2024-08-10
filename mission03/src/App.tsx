@@ -24,7 +24,7 @@ function NoteApp() {
   // [상태 업데이트]
 
   // 루트 상태 변경 함수
-  const handleChangeRoute = (nextRoute: string, pickNoteId?: number = 0) => {
+  const handleChangeRoute = (nextRoute: string, pickNoteId?: number) => {
     setRouteInfo({
       ...routeInfo,
       route: nextRoute,
@@ -41,6 +41,11 @@ function NoteApp() {
   };
 
   // 노트 수정
+  const handleEditNote = (willEditNote: NoteType) => {
+    const nextList = list.map((item) => (item.id === willEditNote.id) ? willEditNote : item)
+
+    setList(nextList);
+  };
 
   // 노트 삭제
 
@@ -57,7 +62,7 @@ function NoteApp() {
     case ROUTES.detail:
       return <NoteDetailPage noteId={routeInfo.noteId} onChangeRoute={handleChangeRoute} />;
     case ROUTES.edit:
-      return <NoteEditPage noteId={routeInfo.noteId} onChangeRoute={handleChangeRoute} />;
+      return <NoteEditPage noteId={routeInfo.noteId} onEdit={handleEditNote} onChangeRoute={handleChangeRoute} />;
   }
 }
 

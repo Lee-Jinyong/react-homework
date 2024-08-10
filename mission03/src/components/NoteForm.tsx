@@ -9,21 +9,37 @@ const userList = getUserList();
 interface NoteForm {
   mode?: 'create' | 'edit',
   note?: NoteType,
-  newNoteId: number,
+  newNoteId?: number,
   onCreate?: (newNoteItem: NoteType) => void,
+  onEdit?: (willEditNote: NoteType) => void,
   onBackToList?: () => void
 };
 
-function NoteForm({ mode = 'create', note, newNoteId, onCreate, onBackToList }: NoteForm) : JSX.Element {
+function NoteForm({ mode = 'create', note, newNoteId, onCreate, onEdit, onBackToList }: NoteForm) : JSX.Element {
   const titleId = useId();
   const contentId = useId();
   const userId = useId();
 
   // [상태 선언]
-  const [formData, setFormData] = useState({
-    title: '',
-    content: '',
-    userId: 0,
+  const [formData, setFormData] = useState(() => {
+    // 노트 생성 모드
+    if (mode === 'create') {
+      return {
+        title: '',
+        content: '',
+        userId: 0,
+      }
+    }
+
+    if (mode === 'edit' && note) {
+      return {
+        title: note.title,
+        content: convertHTMLToText(note.content),
+        userId: note.userId,
+      }
+    } else {
+      throw new Error('노트(note) 데이터가 존재하지 않습니다.')
+    }
   })
 
   // [상태 업데이트]
@@ -38,7 +54,7 @@ function NoteForm({ mode = 'create', note, newNoteId, onCreate, onBackToList }: 
   }
 
   // 노트 생성
-  const handleSubmit = (e: FormEvent) => {
+  const handleCreateNote = (e: FormEvent) => {
     e.preventDefault();
 
     const { title, content, userId } = formData;
@@ -77,6 +93,20 @@ function NoteForm({ mode = 'create', note, newNoteId, onCreate, onBackToList }: 
     e.preventDefault();
   };
 
+  // 노트 수정
+  const handleEditNote = (e: FormEvent) => {
+    e.preventDefault();
+
+    const willEditNote = {
+      ...note,
+      ...formData
+    }
+
+    onEdit?.(willEditNote);
+    
+    onBackToList?.();
+  }
+
   // 노트 삭제
   const handleDelete = () => {
     console.log('delete');
@@ -85,6 +115,7 @@ function NoteForm({ mode = 'create', note, newNoteId, onCreate, onBackToList }: 
   // [파생 상태]
   const isCreateMode = mode.includes('create');
   const submitButtonLabel = isCreateMode ? '추가' : '수정';
+  const handleSubmit = isCreateMode ? handleCreateNote : handleEditNote
 
   return (
     <form className="NoteForm" onSubmit={handleSubmit} onReset={handleReset}>
@@ -94,7 +125,7 @@ function NoteForm({ mode = 'create', note, newNoteId, onCreate, onBackToList }: 
           type="text"
           id={titleId}
           name="title"
-          value={note?.title}
+          value={formData.title}
           onChange={handleUpdateFormData}
         />
       </div>
@@ -104,7 +135,7 @@ function NoteForm({ mode = 'create', note, newNoteId, onCreate, onBackToList }: 
         <textarea
           id={contentId}
           name="content"
-          value={note && convertHTMLToText(note.content)}
+          value={formData.content}
           onChange={handleUpdateFormData}
         />
       </div>
