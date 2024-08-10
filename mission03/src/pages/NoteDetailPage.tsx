@@ -15,6 +15,8 @@ function NoteDetailPage({ noteId, onChangeRoute }: NoteDetailPage) : JSX.Element
 
   const handleBackToList = () => onChangeRoute(ROUTES.list);
 
+  const createMarkup = () => ({ __html: (note as NoteType).content })
+
   return (
     <div className="NoteDetailPage">
       <BackLink onClick={handleBackToList} />
@@ -23,7 +25,7 @@ function NoteDetailPage({ noteId, onChangeRoute }: NoteDetailPage) : JSX.Element
         <>
           <h2>{note.title}</h2>
           <span>{note.expand.user.name}</span>
-          <div dangerouslySetInnerHTML={{ __html: note.content }} />
+          <div dangerouslySetInnerHTML={createMarkup()} />
         </>
       )}
     </div>
