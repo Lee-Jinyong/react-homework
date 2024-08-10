@@ -8,7 +8,7 @@ import { MouseEvent } from 'react';
 import { convertSlug } from '@/utils';
 
 interface NoteDetailPage {
-  noteId: number,
+  noteId: number | null,
   onChangeRoute?: (nextRoute: string, pickNoteId?: number) => void,
 };
 

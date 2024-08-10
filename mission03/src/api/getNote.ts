@@ -12,8 +12,11 @@ export function getNoteList() {
   });
 }
 
-export function getNoteItem(noteId: number) {
-  const notes = getNoteList();
-  const note = notes.find((note) => note.id === noteId);
-  return note ? (note as NoteType) : null;
+export function getNoteItem(noteId: number | null) {
+  if (noteId) {
+    const notes = getNoteList();
+    const note = notes.find((note) => note.id === noteId);
+    return note ? (note as NoteType) : null;
+  }
+  return null;
 }

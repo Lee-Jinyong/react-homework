@@ -7,7 +7,7 @@ import './NoteEditPage.css';
 import { NoteType } from '@/types/note';
 
 interface NoteEditPage {
-  noteId: number,
+  noteId: number | null,
   onEdit?: (willEditNote: NoteType) => void, 
   onDelete? : (willDeleteNoteId: number) => void,
   onChangeRoute?: (nextRoute: string, pickNoteId?: number) => void,
