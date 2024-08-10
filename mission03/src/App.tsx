@@ -27,7 +27,7 @@ function NoteApp() {
     case ROUTES.list:
       return <NoteListPage onChangeRoute={handleChangeRoute} />;
     case ROUTES.create:
-      return <NoteCreatePage />;
+      return <NoteCreatePage onChangeRoute={handleChangeRoute} />;
     case ROUTES.detail:
       return <NoteDetailPage noteId={routeInfo.noteId} />;
     case ROUTES.edit:
