@@ -2,6 +2,7 @@ import { MouseEvent } from 'react';
 import { NoteListType } from '../types/note';
 import './NoteList.css';
 import { ROUTES } from '@/constants/routes';
+import { convertSlug } from '@/utils';
 
 interface NoteList {
   list: NoteListType,
@@ -21,7 +22,7 @@ function NoteList({ list, onChangeRoute }: NoteList) : JSX.Element {
       <h2>노트 필기 목록</h2>
       <ul>
         {list.map((item) => {
-          const slug = `#${item.title.replace(/\s+/g, '-')}`;
+          const slug = `#${convertSlug(item.title)}`;
 
           return (
             <li key={item.id}>

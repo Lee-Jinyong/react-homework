@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useId, useState } from 'react';
 import { getUser, getUserList } from '../api/getUser';
 import { NoteType } from '../types/note';
-import { convertHTMLToText, convertTextToHTMLString } from '@/utils/convertTextToHTMLString';
+import { convertHTMLToText, convertTextToHTMLString } from '@/utils';
 import './NoteForm.css';
 
 const userList = getUserList();
