@@ -1,15 +1,15 @@
-import { MouseEvent, useState } from 'react';
-import { getNoteList } from '../api/getNote';
+import { MouseEvent } from 'react';
 import NoteList from '../components/NoteList';
 import './NoteListPage.css';
 import { ROUTES } from '@/constants/routes';
+import { NoteListType } from '@/types/note';
 
 interface NoteListPage {
+  list : NoteListType,
   onChangeRoute : (nextRoute: string) => void
 }
 
-function NoteListPage({ onChangeRoute }: NoteListPage) : JSX.Element {
-  const [list] = useState(() => getNoteList());
+function NoteListPage({ list, onChangeRoute }: NoteListPage) : JSX.Element {
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault;

@@ -4,6 +4,7 @@ import NoteListPage from './pages/NoteListPage';
 import NoteCreatePage from './pages/NoteCreatePage';
 import NoteDetailPage from './pages/NoteDetailPage';
 import NoteEditPage from './pages/NoteEditPage';
+import { getNoteList } from './api/getNote';
 
 function NoteApp() {
   // 상태 선언
@@ -11,6 +12,8 @@ function NoteApp() {
     route: ROUTES.list,
     noteId: null,
   });
+
+  const [list] = useState(() => getNoteList());
 
   // 상태 업데이트
 
@@ -25,7 +28,7 @@ function NoteApp() {
   switch (routeInfo.route) {
     default:
     case ROUTES.list:
-      return <NoteListPage onChangeRoute={handleChangeRoute} />;
+      return <NoteListPage list={list} onChangeRoute={handleChangeRoute} />;
     case ROUTES.create:
       return <NoteCreatePage onChangeRoute={handleChangeRoute} />;
     case ROUTES.detail:
